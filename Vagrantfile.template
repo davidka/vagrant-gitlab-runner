@@ -1,0 +1,16 @@
+# Gitlab Runner in a vagrant box
+# Server logs are in /var/log/messages
+
+Vagrant.configure("2") do |config|
+  # config.vm.box = "bento/centos-7.6"
+  config.vm.box = "genebean/centos-7-docker-ce"
+  runner_version = "latest"
+  name = "GITLAB_RUNNER_VERSION"
+  runner_url = "GITLAB_URL"
+  runner_docker_image = "GITLAB_RUNNER_DOCKER_IMAGE"
+  runner_tags = "GITLAB_RUNNER_TAGS"
+  runner_token = "GITLAB_RUNNER_TOKEN"
+
+  # Provision
+  config.vm.provision :shell, path: "provision.sh", args: [runner_version, name, runner_url, runner_token, runner_docker_image, runner_tags]
+end
